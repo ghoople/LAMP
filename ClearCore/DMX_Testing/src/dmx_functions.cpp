@@ -1,4 +1,4 @@
-#include "dmx_functions.h"
+#include <dmx_functions.h>
 #include <ClearCore.h>
 #include <Arduino.h>
 
@@ -29,13 +29,15 @@ void updateDMXReceiver() {
         int receivedChar = Serial0.read();
         if (receivedChar < 0) {
             dmxState = DMX_IDLE;
+            dmxDataValid = false; // Invalidate data on error
             continue;
         }
         // Software timing-based BREAK detection
         if (now - lastByteTime > BREAK_THRESHOLD_US) {
-            // BREAK detected
+            // BREAK detected - this byte should be start code
             dmxState = DMX_IDLE;
             dmxChannelIndex = 0;
+            dmxDataValid = false; // Invalidate data on break
         }
         lastByteTime = now;
         switch (dmxState) {
@@ -46,12 +48,16 @@ void updateDMXReceiver() {
                     dmxBuffer[0] = receivedChar;
                 }
                 break;
-            case DMX_BREAK_DETECTED:
-                break;
             case DMX_RECEIVING_DATA:
                 if (dmxChannelIndex <= DMX_MAX_CHANNELS) {
                     dmxBuffer[dmxChannelIndex] = (uint8_t)receivedChar;
                     dmxChannelIndex++;
+                    // Buffer overrun protection
+                    if (dmxChannelIndex > DMX_MAX_CHANNELS) {
+                        dmxState = DMX_IDLE;
+                        dmxDataValid = false;
+                        break;
+                    }
                     if (dmxChannelIndex > (DMX_START_ADDRESS + DMX_CHANNELS_NEEDED - 1)) {
                         dmxState = DMX_FRAME_COMPLETE;
                         dmxFrameReady = true;
@@ -60,6 +66,7 @@ void updateDMXReceiver() {
                     }
                 } else {
                     dmxState = DMX_IDLE;
+                    dmxDataValid = false;
                 }
                 break;
             case DMX_FRAME_COMPLETE:

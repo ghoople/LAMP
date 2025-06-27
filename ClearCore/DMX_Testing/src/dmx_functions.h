@@ -15,7 +15,6 @@
 // DMX Reception State Machine
 enum DMXState {
     DMX_IDLE,
-    DMX_BREAK_DETECTED,
     DMX_RECEIVING_DATA,
     DMX_FRAME_COMPLETE
 };

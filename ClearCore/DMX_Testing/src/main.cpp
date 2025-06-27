@@ -42,6 +42,14 @@ void loop() {
             speedChannel = 0;
         }
     }
+
+    uint8_t position = getDMXChannel(DMX_START_ADDRESS);
+    uint8_t speed = getDMXChannel(DMX_START_ADDRESS + 1);
+
+    Serial.print("Current pos: ");
+    Serial.print(position);
+    Serial.print(" speed: ");
+    Serial.println(speed);
     
     delay(10); // Small delay
 }
