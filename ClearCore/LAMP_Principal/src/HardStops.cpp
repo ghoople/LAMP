@@ -1,5 +1,4 @@
 // Interrupt functions that are called when a sensor at either hardstop is tripped. 
-
 #include "main.h"
 
 bool hardStopTrip = false; // Variable to track if a hard stop has been tripped.

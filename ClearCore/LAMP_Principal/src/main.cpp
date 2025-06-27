@@ -1,14 +1,17 @@
 /*
- * Penumbra_Principal
+ * LAMP_Principal
  *
- *  This is the primary code base that will run on the clear core.
+ *  This is the primary code base that will run on the clear core to control the light tower for LAMP
  * 
  */
 #include "main.h"
+#include <Arduino.h>
+#include <ClearCore.h>
 
 // Define the baud rate for the serial devices
-#define usbBaudRate 9600
-#define agentBaudRate 9600
+#define usbBaudRate 115200
+
+bool debug = true;
 
 // Define the initial velocity limit, acceleration limit, and commanded deceleration to be used for default moves
 #define initialVelocityLimit 2000 // pulses per sec
@@ -17,21 +20,12 @@
 #define homingVelocity -500 //Velocity to home the motor. 
 
 void setup() {
-    bool debug = true;
     // Communications Setup
         // Serial Coms to the USB Port (with timeout)
         Serial.begin(usbBaudRate);
         uint32_t timeout = 5000; // 5 second timeout
         uint32_t startTime = millis();
         while (!Serial && millis() - startTime < timeout) {
-            continue;
-        }
-
-        // Serials Coms to the agent arduino via Serial 1 port. 
-        Serial1.begin(agentBaudRate);
-        Serial1.ttl(true); // Tells serial one to use TTL logiv (5V signals)
-        startTime = millis();
-        while (!Serial1 && millis() - startTime < timeout) {
             continue;
         }
 
@@ -69,30 +63,48 @@ void setup() {
         
         if(debug){Serial.println("Homing Complete");}
     
-    // Encoder Setup
-        EncoderIn.Enable(true); // Enable the encoder input feature      
-        EncoderIn.SwapDirection(false); // Swap direction if you want for the encoder
-        EncoderIn.IndexInverted(false); // Set the sense of index detection (true = rising edge, false = falling edge)
-        EncoderIn.Position(0); // Zero the encoder position to match the zero of the motor. 
 
     delay(1000); // Probably don't need this. But can give it all a second to catchup. 
     if(debug){Serial.println("Setup complete");}
 }
 
 void loop() {
-    //Animation Order Defined Here
+    
+    // Add Code here to receive DMX Signals
 
-/*
-    // Might want to move the light carriage to the bottom, this is where all animations are assumed to start (in case there was an error)
-    motor.Move(Bot, MotorDriver::MOVE_TARGET_ABSOLUTE);
+
+    // Add Code here to see if there is an updated position or speed coming in over DMX, 
+    // I'm not totally sure how this would looks
+    // IF NEW POSITION AND SPEED RECEIVED
+    // Right now assume they are this: 
+    
+    uint8_t DMXposition = 100; // Position value ranges 0 -> 255
+    uint8_t DMXspeed = 50; // Speed value ranges 0->255
+
+    int position = DMXposition/255*Top; // Bottom is 0, Top is defined in header file
+    int speed = DMXspeed/255*motorMaxSpeed; // Maximum speed for the control wheel was 5000
+
+     // Sets the maximum velocity for this move
+    motor.VelMax(speed);
+
+    // Command the move of absolute distance
+    motor.Move(position, MotorDriver::MOVE_TARGET_ABSOLUTE);
+
+    /* Waits for all step pulses to output. While waiting it needs to: 
+    1. Monitor the DMX signal for position or velocity changes and break out of loop. 
+    2. Monitor for hard stop trips, because if it trips it could get stuck in an infinite loop (was a pain to degbug in Penumbra). 
+    */
+
     while (!motor.StepsComplete()) {
-        continue;}
-*/
 
-    Animation(1);
-    Animation(2);
-    //Animation(3);
+        // Add code here to check and see if a new DMX Signal is received (I think, then do something)  
 
-    Serial.println("Animation Loop Complete");
-    delay(1000);
+        // Check for hard stop trips, break out of while loop if one is detected to avoid infinite loop. 
+        if(hardStopTrip){
+            if(debug){Serial.println("Hard Stop Trip Detected, breaking out of while loop to avoid crash.");}
+            hardStopTrip = false; // Reset the global hard stop trip variable
+            break; // Break out of the while loop. This is critically important, without it, the ClearCore becomes inconsistenly unresponsive.
+        }    
+    }
+    delay(10);
 }

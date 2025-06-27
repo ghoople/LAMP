@@ -19,7 +19,7 @@ extern bool hardStopTrip; // Global variable to track if a hard stop has been tr
 #define motor ConnectorM0
 #define motorDecel 4000 //Defines how quickly the motor should decelerate when switching into/out of user mode. 
 #define accelerationLimit 9000 // pulses per sec^2
-#define wheelThreshold 200 // Define what speed the encoder needs to move at for it to be considered a user input (200 pulses/second) 
+#define motorMaxSpeed 5000 // 5000 pulses per sec worked well for the penumbra wheel control
 
 // Define the physical relationship between steps and light position
 // See "Penumbra Motor Calculations" google sheet for value calculator
@@ -28,21 +28,9 @@ extern bool hardStopTrip; // Global variable to track if a hard stop has been tr
 #define Mid Top/2
 #define Home_Offset 95 // This is 1 inch in pulses (I think)
 
-// Define how long the index is for the halogen lighting array. Can't be an int. 
-#define halIndexLength 100
-
-// DMX Brightness Levels, range is 0 -> 255
-#define maxBright 255
-#define midBright 175
-#define lowBright 150
-#define off 0
 
 // Function Declarations
-void Pause(int pauseTime, int* halA, int* halB);
-void MoveTarget(int target, int velocityLimit, int* halA, int* halB);
 void BottomHardStop();
 void TopHardStop();
-void WheelControl();
-void Animation(int showNum);
 
 #endif // MAIN_H
