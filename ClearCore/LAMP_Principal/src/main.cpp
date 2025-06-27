@@ -13,12 +13,6 @@
 
 bool debug = true;
 
-// Define the initial velocity limit, acceleration limit, and commanded deceleration to be used for default moves
-#define initialVelocityLimit 2000 // pulses per sec
-
-// Homing velocity might need to have the sign changed so that it goes the correct direction. 
-#define homingVelocity -500 //Velocity to home the motor. 
-
 void setup() {
     // Communications Setup
         // Serial Coms to the USB Port (with timeout)
@@ -70,19 +64,15 @@ void setup() {
 
 void loop() {
     
-    // Add Code here to receive DMX Signals
+    // Add Code here to receive DMX Signals and check if I get new values. If i do get new values, then I'd want to do something. 
 
-
-    // Add Code here to see if there is an updated position or speed coming in over DMX, 
-    // I'm not totally sure how this would looks
-    // IF NEW POSITION AND SPEED RECEIVED
     // Right now assume they are this: 
     
     uint8_t DMXposition = 100; // Position value ranges 0 -> 255
     uint8_t DMXspeed = 50; // Speed value ranges 0->255
 
-    int position = DMXposition/255*Top; // Bottom is 0, Top is defined in header file
-    int speed = DMXspeed/255*motorMaxSpeed; // Maximum speed for the control wheel was 5000
+    int position = (DMXposition * Top) / 255;
+    int speed = (DMXspeed * motorMaxSpeed) / 255; // Maximum speed for the control wheel was 5000
 
      // Sets the maximum velocity for this move
     motor.VelMax(speed);
@@ -97,7 +87,7 @@ void loop() {
 
     while (!motor.StepsComplete()) {
 
-        // Add code here to check and see if a new DMX Signal is received (I think, then do something)  
+        // Add code here to check and see if a new DMX Signal is received (I think, then maybe break out of the loop)  
 
         // Check for hard stop trips, break out of while loop if one is detected to avoid infinite loop. 
         if(hardStopTrip){
