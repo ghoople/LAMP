@@ -11,6 +11,7 @@
 bool debug = true;
 
 //Temporarily Initialize variables for storing DMX values, these will actually be in the DMX code
+// This will need to be removed if I get the DMX read to work and integrate it here. 
 uint8_t positionChannel = 0; // Position value ranges 0 -> 255
 uint8_t speedChannel = 0; // Speed value ranges 0->255
 
@@ -70,9 +71,7 @@ void setup() {
 
 void loop() {
     
-    // Add Code here to receive DMX Signals and check if I get new values. If i do get new values, then I'd want to do something. 
-
-        // Right now assume they are this: 
+    // DMX Code will go here, for now hard code: 
 
         positionChannel = 100; // Position value ranges 0 -> 255
         speedChannel = 50; // Speed value ranges 0->255
