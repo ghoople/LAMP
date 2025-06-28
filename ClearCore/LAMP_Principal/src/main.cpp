@@ -97,6 +97,4 @@ void loop() {
             Serial.println(motorSpeed);
         }
     }
-
-    delay(10); // Slow the loop down a little bit so we aren't overclocking. Probably not necessary? 
 }

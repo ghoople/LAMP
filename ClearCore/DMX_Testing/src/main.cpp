@@ -37,26 +37,22 @@ void loop() {
         dmxFrameReady = false;
     }
     
-    // Check for DMX timeout, if so reset the variables to 0 
+    // Check for DMX timeout and print a warning
     if (millis() - lastFrameTime > DMX_FRAME_TIMEOUT_MS) {
         if (dmxDataValid) {
             Serial.print("*** DMX signal lost! ***\r\n");
             dmxDataValid = false;
-            positionChannel = 0;
-            speedChannel = 0;
         }
     }
 
     if (positionChannel != positionLast || speedChannel != speedLast) {
         Serial.print("Change Detected: positionChannel=");
         Serial.print(positionChannel);
-        Serial.print(" speedChannel="); 
+        Serial.print(", speedChannel="); 
         Serial.println(speedChannel);
 
         // Update tracking variables
         positionLast = positionChannel;
         speedLast = speedChannel;
     }
-    
-    delay(10); // Small delay
 }
