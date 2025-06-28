@@ -48,7 +48,6 @@ void loop() {
     }
 
     if (positionChannel != positionLast || speedChannel != speedLast) {
-        
         Serial.print("Change Detected: positionChannel=");
         Serial.print(positionChannel);
         Serial.print(" speedChannel="); 
@@ -58,13 +57,6 @@ void loop() {
         positionLast = positionChannel;
         speedLast = speedChannel;
     }
-
-
-
-    Serial.print("Change Detected, Current Pos: ");
-    Serial.print(positionChannel);
-    Serial.print(", Speed: ");
-    Serial.println(speedChannel);
     
     delay(10); // Small delay
 }
