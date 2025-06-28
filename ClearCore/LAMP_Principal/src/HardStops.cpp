@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-bool hardStopTrip = false; // Variable to track if a hard stop has been tripped.
+volatile bool hardStopTrip = false; // Variable to track if a hard stop has been tripped.
 
 void BottomHardStop() {
     // Called via interrupt when the hard stop pin is tripped. 
