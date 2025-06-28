@@ -1,7 +1,8 @@
 // Interrupt functions that are called when a sensor at either hardstop is tripped. 
+
 #include "main.h"
 
-volatile bool hardStopTrip = false; // Variable to track if a hard stop has been tripped.
+bool hardStopTrip = false; // Variable to track if a hard stop has been tripped.
 
 void BottomHardStop() {
     // Called via interrupt when the hard stop pin is tripped. 

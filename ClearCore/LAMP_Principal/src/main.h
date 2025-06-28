@@ -6,6 +6,9 @@
 #include <Arduino.h>
 #include <ClearCore.h>
 
+// Define the baud rate for the USD serial
+#define usbBaudRate 115200
+
 // Configure Interrupt Pins for the hard stops
 // Pins that support digital interrupts on clear core are:
 // DI-6, DI-7, DI-8, A-9, A-10, A-11, A-12

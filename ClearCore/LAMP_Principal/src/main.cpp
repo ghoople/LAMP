@@ -4,14 +4,20 @@
  *  This is the primary code base that will run on the clear core to control the light tower for LAMP
  * 
  */
-#include "main.h"
+#include <main.h>
 #include <Arduino.h>
 #include <ClearCore.h>
 
-// Define the baud rate for the serial devices
-#define usbBaudRate 115200
-
 bool debug = true;
+
+//Temporarily Initialize variables for storing DMX values, these will actually be in the DMX code
+uint8_t positionChannel = 0; // Position value ranges 0 -> 255
+uint8_t speedChannel = 0; // Speed value ranges 0->255
+
+// Variables to store last position
+uint8_t positionLast = 0; // Position value ranges 0 -> 255
+uint8_t speedLast = 0; // Speed value ranges 0->255
+
 
 void setup() {
     // Communications Setup
@@ -66,35 +72,31 @@ void loop() {
     
     // Add Code here to receive DMX Signals and check if I get new values. If i do get new values, then I'd want to do something. 
 
-    // Right now assume they are this: 
-    
-    uint8_t DMXposition = 100; // Position value ranges 0 -> 255
-    uint8_t DMXspeed = 50; // Speed value ranges 0->255
+        // Right now assume they are this: 
 
-    int position = (DMXposition * Top) / 255;
-    int speed = (DMXspeed * motorMaxSpeed) / 255; // Maximum speed for the control wheel was 5000
+        positionChannel = 100; // Position value ranges 0 -> 255
+        speedChannel = 50; // Speed value ranges 0->255
 
-     // Sets the maximum velocity for this move
-    motor.VelMax(speed);
-
-    // Command the move of absolute distance
-    motor.Move(position, MotorDriver::MOVE_TARGET_ABSOLUTE);
-
-    /* Waits for all step pulses to output. While waiting it needs to: 
-    1. Monitor the DMX signal for position or velocity changes and break out of loop. 
-    2. Monitor for hard stop trips, because if it trips it could get stuck in an infinite loop (was a pain to degbug in Penumbra). 
-    */
-
-    while (!motor.StepsComplete()) {
-
-        // Add code here to check and see if a new DMX Signal is received (I think, then maybe break out of the loop)  
-
-        // Check for hard stop trips, break out of while loop if one is detected to avoid infinite loop. 
-        if(hardStopTrip){
-            if(debug){Serial.println("Hard Stop Trip Detected, breaking out of while loop to avoid crash.");}
-            hardStopTrip = false; // Reset the global hard stop trip variable
-            break; // Break out of the while loop. This is critically important, without it, the ClearCore becomes inconsistenly unresponsive.
-        }    
+    if (positionChannel != positionLast || speedChannel != speedLast) {
+        
+        int motorPosition = (positionChannel * Top) / 255;
+        int motorSpeed = (speedChannel * motorMaxSpeed) / 255;
+        
+        // Set speed and move (ClearCore will blend with any in-progress move)
+        motor.VelMax(motorSpeed);
+        motor.Move(motorPosition, MotorDriver::MOVE_TARGET_ABSOLUTE);
+        
+        // Update tracking variables
+        positionLast = positionChannel;
+        speedLast = speedChannel;
+        
+        if(debug) {
+            Serial.print("Updated motor commands sent: Position=");
+            Serial.print(motorPosition);
+            Serial.print(" Speed="); 
+            Serial.println(motorSpeed);
+        }
     }
-    delay(10);
+
+    delay(10); // Slow the loop down a little bit so we aren't overclocking. Probably not necessary? 
 }

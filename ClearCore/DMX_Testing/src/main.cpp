@@ -2,6 +2,10 @@
 #include <Arduino.h>
 #include <dmx_functions.h>
 
+// Variables to store last position
+uint8_t positionLast = 0; // Position value ranges 0 -> 255
+uint8_t speedLast = 0; // Speed value ranges 0->255
+
 void setup() {
     // Initialize USB Serial for debugging
     Serial.begin(115200);
@@ -27,13 +31,13 @@ void loop() {
     // Update DMX receiver
     updateDMXReceiver();
     
-    // Process received DMX data
+    // Process received DMX data, will update positionChannel and speedChannel (extern variables)
     if (dmxFrameReady) {
         processDMXData();
         dmxFrameReady = false;
     }
     
-    // Check for DMX timeout
+    // Check for DMX timeout, if so reset the variables to 0 
     if (millis() - lastFrameTime > DMX_FRAME_TIMEOUT_MS) {
         if (dmxDataValid) {
             Serial.print("*** DMX signal lost! ***\r\n");
@@ -43,13 +47,24 @@ void loop() {
         }
     }
 
-    uint8_t DMXposition = getDMXChannel(DMX_START_ADDRESS);
-    uint8_t DMXspeed = getDMXChannel(DMX_START_ADDRESS + 1);
+    if (positionChannel != positionLast || speedChannel != speedLast) {
+        
+        Serial.print("Change Detected: positionChannel=");
+        Serial.print(positionChannel);
+        Serial.print(" speedChannel="); 
+        Serial.println(speedChannel);
 
-    Serial.print("Current pos: ");
-    Serial.print(DMXposition);
-    Serial.print(" speed: ");
-    Serial.println(DMXspeed);
+        // Update tracking variables
+        positionLast = positionChannel;
+        speedLast = speedChannel;
+    }
+
+
+
+    Serial.print("Change Detected, Current Pos: ");
+    Serial.print(positionChannel);
+    Serial.print(", Speed: ");
+    Serial.println(speedChannel);
     
     delay(10); // Small delay
 }
