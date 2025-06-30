@@ -39,11 +39,16 @@ extern volatile bool inSilence;
 void setupDMX();
 void updateDMXReceiver();
 void processDMXData();
+void resetReceiver();
+void startNewFrame();
+void completeFrame();
 uint8_t getDMXChannel(uint16_t channel);
 void printDMXStatus(); // For debugging
+void resetDMXStats(); // Reset error counters
 
-// Frame tracking variables
+// Additional tracking variables
 extern volatile uint32_t frameCount;
 extern volatile uint32_t errorCount;
+extern volatile uint16_t lastCompleteFrameSize;
 
 #endif // DMX_FUNCTIONS_H

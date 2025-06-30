@@ -1,4 +1,4 @@
-// dmx_functions.cpp - Simplified robust version
+// dmx_functions.cpp - Fixed frame synchronization
 #include <dmx_functions.h>
 #include <ClearCore.h>
 #include <Arduino.h>
@@ -13,10 +13,17 @@ volatile bool dmxDataValid = false;
 uint8_t positionChannel = 0;
 uint8_t speedChannel = 0;
 
-// Simple timing for BREAK detection
+// Frame tracking
 volatile uint32_t lastByteTime = 0;
 volatile uint32_t frameCount = 0;
 volatile uint32_t errorCount = 0;
+volatile uint16_t completedFrameSize = 0; // Size of last completed frame
+
+// Debug variables
+volatile uint16_t lastFrameSizes[10];
+volatile uint8_t frameSizeIndex = 0;
+volatile uint32_t breakGaps[10];
+volatile uint8_t breakGapIndex = 0;
 
 void setupDMX() {
     Serial0.begin(DMX_BAUD_RATE, SERIAL_8N2);
@@ -29,9 +36,12 @@ void setupDMX() {
     lastByteTime = micros();
     frameCount = 0;
     errorCount = 0;
+    completedFrameSize = 0;
     
-    // Clear buffer
+    // Clear buffers and arrays
     memset(dmxBuffer, 0, sizeof(dmxBuffer));
+    memset((void*)lastFrameSizes, 0, sizeof(lastFrameSizes));
+    memset((void*)breakGaps, 0, sizeof(breakGaps));
 }
 
 void updateDMXReceiver() {
@@ -41,8 +51,9 @@ void updateDMXReceiver() {
         int receivedByte = Serial0.read();
         
         if (receivedByte < 0) {
-            // Read error
+            // Read error - reset completely
             dmxState = DMX_IDLE;
+            dmxChannelIndex = 0;
             dmxDataValid = false;
             errorCount++;
             continue;
@@ -51,23 +62,43 @@ void updateDMXReceiver() {
         uint8_t data = (uint8_t)receivedByte;
         uint32_t timeSinceLastByte = now - lastByteTime;
         
-        // Simple BREAK detection: gap > 150µs indicates new frame
+        // BREAK detection: gap > 150µs indicates new frame
         if (timeSinceLastByte > 150) {
-            // Potential BREAK detected - reset for new frame
+            // Log break gap
+            breakGaps[breakGapIndex] = timeSinceLastByte;
+            breakGapIndex = (breakGapIndex + 1) % 10;
+            
+            // Complete previous frame if it had enough data
+            if (dmxState == DMX_RECEIVING_DATA && dmxChannelIndex >= (DMX_START_ADDRESS + DMX_CHANNELS_NEEDED)) {
+                // Atomically complete the frame
+                completedFrameSize = dmxChannelIndex;
+                lastFrameSizes[frameSizeIndex] = completedFrameSize;
+                frameSizeIndex = (frameSizeIndex + 1) % 10;
+                
+                dmxFrameReady = true;
+                dmxDataValid = true;
+                lastFrameTime = millis();
+                frameCount++;
+            }
+            
+            // Reset for new frame - ALWAYS reset on BREAK
             dmxState = DMX_IDLE;
             dmxChannelIndex = 0;
         }
         
         lastByteTime = now;
         
+        // Process the current byte based on state
         switch (dmxState) {
             case DMX_IDLE:
-                // Look for start code
+                // ONLY accept start code after a BREAK
                 if (data == DMX_START_CODE) {
                     dmxState = DMX_RECEIVING_DATA;
                     dmxBuffer[0] = data;
-                    dmxChannelIndex = 1;
-                    // Don't mark as valid yet - need more data
+                    dmxChannelIndex = 1; // Next byte will be channel 1
+                } else {
+                    // Not a valid start - stay in IDLE
+                    // This prevents false synchronization
                 }
                 break;
                 
@@ -75,31 +106,22 @@ void updateDMXReceiver() {
                 if (dmxChannelIndex <= DMX_MAX_CHANNELS) {
                     dmxBuffer[dmxChannelIndex] = data;
                     dmxChannelIndex++;
-                    
-                    // Mark frame as ready when we have our required channels
-                    if (dmxChannelIndex > (DMX_START_ADDRESS + DMX_CHANNELS_NEEDED - 1)) {
-                        if (!dmxFrameReady) { // Only count new frames
-                            dmxFrameReady = true;
-                            dmxDataValid = true;
-                            lastFrameTime = millis();
-                            frameCount++;
-                        }
-                    }
                 } else {
-                    // Buffer overflow
+                    // Buffer overflow - reset
                     dmxState = DMX_IDLE;
+                    dmxChannelIndex = 0;
                     dmxDataValid = false;
                     errorCount++;
                 }
                 break;
                 
             case DMX_FRAME_COMPLETE:
-                // This state isn't used in this simplified version
-                dmxState = DMX_RECEIVING_DATA;
+                // Should not reach here in this implementation
+                dmxState = DMX_IDLE;
                 break;
         }
         
-        now = micros(); // Update time for next iteration
+        now = micros();
     }
 }
 
@@ -108,20 +130,24 @@ void processDMXData() {
         return;
     }
     
-    // Clear frame ready flag
+    // Clear frame ready flag atomically
     dmxFrameReady = false;
     
+    // Use the completed frame size, not the current receiving position
+    uint16_t frameSize = completedFrameSize;
+    
+    // Extract channel data safely
     uint8_t newPosition = getDMXChannel(DMX_START_ADDRESS);
     uint8_t newSpeed = getDMXChannel(DMX_START_ADDRESS + 1);
     
-    // Always show what we received
+    // Display frame info with correct size
     Serial.print("Frame #"); Serial.print(frameCount);
-    Serial.print(": Ch1="); Serial.print(dmxBuffer[1]);
+    Serial.print(" ("); Serial.print(frameSize); Serial.print(" ch): ");
+    Serial.print("Ch1="); Serial.print(dmxBuffer[1]);
     Serial.print(" Ch2="); Serial.print(dmxBuffer[2]);
     Serial.print(" Ch3="); Serial.print(dmxBuffer[3]);
     Serial.print(" Ch4="); Serial.print(dmxBuffer[4]);
     Serial.print(" Ch5="); Serial.print(dmxBuffer[5]);
-    Serial.print(" ("); Serial.print(dmxChannelIndex); Serial.print(" total)");
     
     // Check for changes
     if (newPosition != positionChannel || newSpeed != speedChannel) {
@@ -137,7 +163,7 @@ void processDMXData() {
 
 uint8_t getDMXChannel(uint16_t channel) {
     if (channel >= 1 && channel <= DMX_MAX_CHANNELS && 
-        dmxDataValid && channel < dmxChannelIndex) {
+        dmxDataValid && channel < completedFrameSize) {
         return dmxBuffer[channel];
     }
     return 0;
@@ -151,9 +177,10 @@ void printDMXStatus() {
         case DMX_RECEIVING_DATA: Serial.print("RECEIVING"); break;
         case DMX_FRAME_COMPLETE: Serial.print("COMPLETE"); break;
     }
-    Serial.print(", Channels received: "); Serial.print(dmxChannelIndex);
-    Serial.print(", Data valid: "); Serial.print(dmxDataValid ? "YES" : "NO");
-    Serial.print(", Frame ready: "); Serial.print(dmxFrameReady ? "YES" : "NO");
+    Serial.print(", Current RX: "); Serial.print(dmxChannelIndex);
+    Serial.print(", Last frame: "); Serial.print(completedFrameSize);
+    Serial.print(", Valid: "); Serial.print(dmxDataValid ? "YES" : "NO");
+    Serial.print(", Ready: "); Serial.print(dmxFrameReady ? "YES" : "NO");
     Serial.print("\r\nTotal frames: "); Serial.print(frameCount);
     Serial.print(", Errors: "); Serial.print(errorCount);
     
@@ -162,6 +189,20 @@ void printDMXStatus() {
         Serial.print(", Speed="); Serial.print(speedChannel);
     }
     
-    Serial.print("\r\nLast byte time: "); Serial.print((micros() - lastByteTime) / 1000);
+    // Show frame size history
+    Serial.print("\r\nLast 10 frame sizes: ");
+    for (int i = 0; i < 10; i++) {
+        Serial.print(lastFrameSizes[i]); 
+        if (i < 9) Serial.print(",");
+    }
+    
+    // Show break gap history  
+    Serial.print("\r\nLast 10 break gaps (µs): ");
+    for (int i = 0; i < 10; i++) {
+        Serial.print(breakGaps[i]); 
+        if (i < 9) Serial.print(",");
+    }
+    
+    Serial.print("\r\nLast byte: "); Serial.print((micros() - lastByteTime) / 1000);
     Serial.println("ms ago");
 }
