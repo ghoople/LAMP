@@ -1,3 +1,4 @@
+// dmx_functions.h - Improved version
 #ifndef DMX_FUNCTIONS_H
 #define DMX_FUNCTIONS_H
 
@@ -29,9 +30,20 @@ extern volatile bool dmxDataValid;
 extern uint8_t positionChannel;
 extern uint8_t speedChannel;
 
+// Timing variables
+extern volatile uint32_t lastByteTime;
+extern volatile uint32_t silenceStart;
+extern volatile bool inSilence;
+
+// Function declarations
 void setupDMX();
 void updateDMXReceiver();
 void processDMXData();
 uint8_t getDMXChannel(uint16_t channel);
+void printDMXStatus(); // For debugging
+
+// Frame tracking variables
+extern volatile uint32_t frameCount;
+extern volatile uint32_t errorCount;
 
 #endif // DMX_FUNCTIONS_H

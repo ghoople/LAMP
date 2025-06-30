@@ -36,6 +36,13 @@ void loop() {
         processDMXData();
         dmxFrameReady = false;
     }
+
+    // In main.cpp loop(), add this periodically:
+    static uint32_t lastDebug = 0;
+    if (millis() - lastDebug > 5000) { // Every 5 seconds
+        printDMXStatus();
+        lastDebug = millis();
+    }
     
     // Check for DMX timeout and print a warning
     if (millis() - lastFrameTime > DMX_FRAME_TIMEOUT_MS) {
