@@ -19,7 +19,7 @@ bool debug = false; // Set to true to print debug messages to the serial monitor
 
 // DMX Variables
 // Set DMX shield to master mode
-int channels = 2; // Number of DMX Channels needed for the test
+int channels = 10; // Number of DMX Channels needed for the test
 int DmxStartAddress = 1; // 
 int pos = 0;
 int speed = 125;
