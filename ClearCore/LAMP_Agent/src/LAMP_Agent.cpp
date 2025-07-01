@@ -8,6 +8,9 @@ This code is designed to receive a DMX signal and then transmit it to the clear 
 #include <SoftwareSerial.h> // Add SoftwareSerial
 
 // Define Hardware Pins
+
+// NEED TO DOUBLE CHECK AND DEBUG THESE
+
 // 0 Should not be used, reserved for USB Coms
 // 1 Sould not be used, reserved for USB Coms
 #define dmxDePin 2 // Not needed for receive mode, but kept for reference
