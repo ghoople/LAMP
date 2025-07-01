@@ -51,6 +51,8 @@ void loop() {
 
   DmxSimple.write(DmxStartAddress,pos);
   DmxSimple.write(DmxStartAddress+1,speed);
+  DmxSimple.write(DmxStartAddress+4,24);
+  DmxSimple.write(DmxStartAddress+5,249);
 
   pos++;
   speed++;
