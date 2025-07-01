@@ -80,9 +80,8 @@ void setup() {
 }
 
 void loop() {
-    
-    if(Serial0.available() > 0){
-        //If new data is available over the serial port, read it. 
+
+    if(Serial0.available() > 0){        
         String message = Serial0.readStringUntil('\n'); 
         // Parse the message format "P:{position} S:{speed}"
         int pos = 0, speed = 0;
@@ -90,9 +89,9 @@ void loop() {
             positionChannel = pos;
             speedChannel = speed;
             if(debug){
-                Serial.print("Received: P:");
+                Serial.print("Received: Position:");
                 Serial.print(positionChannel);
-                Serial.print(" S:");
+                Serial.print(" Speed:");
                 Serial.println(speedChannel);
             }
         } else if(debug) {
@@ -101,7 +100,6 @@ void loop() {
     }
 
     if (positionChannel != positionLast || speedChannel != speedLast) {
-        
         int motorPosition = (positionChannel * Top) / 255;
         int motorSpeed = (speedChannel * motorMaxSpeed) / 255;
         

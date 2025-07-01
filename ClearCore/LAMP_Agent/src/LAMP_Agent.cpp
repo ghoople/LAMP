@@ -17,6 +17,7 @@ This code is designed to receive a DMX signal and then transmit it to the clear 
 // Pin 0 RX - by default for DMX Serial Library, uses hardware UART pins
 // Pin 1 TX - by default for DMX Serial Library, uses hardware UART pins
 #define softTxPin 7 // SoftwareSerial TX pin
+#define softRxPin 8 // SoftwareSerial RX pin (unused but must be valid)
 
 // DMX Variables
 int channels = 2; // Number of DMX Channels to read
@@ -24,8 +25,8 @@ int DmxStartAddress = 1; // First channel address
 int lastPos = -1;
 int lastSpeed = -1;
 
-// Create SoftwareSerial object for transmitting on pin 7
-SoftwareSerial softSerial(-1, softTxPin); // RX not used, TX = 7
+// Create SoftwareSerial object
+SoftwareSerial softSerial(softRxPin, softTxPin);
 #define agentBaudRate 38400
 
 static unsigned long lastStatusTime = 0;
@@ -43,11 +44,11 @@ void loop() {
   int pos = DMXSerial.read(DmxStartAddress);
   int speed = DMXSerial.read(DmxStartAddress + 1);
 
-  unsigned long currentMillis = millis();
-  if (currentMillis - lastStatusTime >= 3000) {
-    softSerial.println("Serial communication Debugging Test");
-    lastStatusTime = currentMillis;
-  }
+  // unsigned long currentMillis = millis();
+  // if (currentMillis - lastStatusTime >= 1000) {
+  //   softSerial.println("Serial communication Debugging Test");
+  //   lastStatusTime = currentMillis;
+  // }
 
   if (pos != lastPos || speed != lastSpeed) {
     softSerial.print("P:");
