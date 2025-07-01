@@ -33,7 +33,11 @@ void setup() {
     DMXSerial.init(DMXReceiver);
 
   // SoftwareSerial setup
-    softSerial.begin(9600); // Set baud rate as needed
+    softSerial.begin(38400); // Set baud rate as needed
+  
+  // Might need this, but the jumper probably does it for me.
+  // pinMode(dmxDePin, OUTPUT);
+  // digitalWrite(dmxDePin, LOW);    // LOW = receive mode (CRITICAL!)
 }
 
 void loop() {
@@ -51,5 +55,5 @@ void loop() {
     lastSpeed = speed;
   }
 
-  delay(100); // Polling interval
+  delay(20); // Don't need to run the loop at max speed. 
 }
