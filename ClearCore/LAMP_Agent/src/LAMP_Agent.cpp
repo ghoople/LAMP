@@ -7,21 +7,20 @@ This code is designed to receive a DMX signal and then transmit it to the clear 
 #include <DMXSerial.h> // Use DMXSerial for DMX receive
 #include <SoftwareSerial.h> // Add SoftwareSerial
 
-// Define Hardware Pins
+// CTC-DRA-10-1 NON ISOLATED DMX-RDM SHIELD JUMPER INSTRUCTIONS
+// JUMPER 1: EN        " Shield is enabled (Need to swap to !EN to program it via USB)
+// JUMPER 2: SLAVE     " Set to "Slave" side, puts the shield in receive mode. 
+// JUMPER 3: TX-uart   " Use UART for transmitting data
+// JUMPER 4: RX-uart   " Use UART for receiving data
 
-// NEED TO DOUBLE CHECK AND DEBUG THESE
-
-
-// #define dmxDePin 2 // I think this is jumper set, should be able to delete this line. 
-
-#define dmxRxPin 0 // DMX receive pin (hardware RX)
-#define dmxTxPin 1 // Not used in receive mode, but noted for reference
-
+// Hardware Pins
+// Pin 0 RX - by default for DMX Serial Library, uses hardware UART pins
+// Pin 1 TX - by default for DMX Serial Library, uses hardware UART pins
 #define softTxPin 7 // SoftwareSerial TX pin
 
 // DMX Variables
-int channels = 2; // Number of DMX Channels needed for this test
-int DmxStartAddress = 1; // Channel 1 address
+int channels = 2; // Number of DMX Channels to read
+int DmxStartAddress = 1; // First channel address
 int lastPos = -1;
 int lastSpeed = -1;
 
@@ -32,16 +31,11 @@ SoftwareSerial softSerial(-1, softTxPin); // RX not used, TX = 7
 static unsigned long lastStatusTime = 0;
 
 void setup() {
-  // DMX Setup
-    // Initialize DMXSerial in receive mode
-    DMXSerial.init(DMXReceiver);
+  // Initialize DMXSerial in receive mode
+    DMXSerial.init(DMXReceiver); 
 
   // SoftwareSerial setup
-    softSerial.begin(agentBaudRate); // Set baud rate as needed
-  
-  // Might need this, but the jumper probably does it for me.
-  // pinMode(dmxDePin, OUTPUT);
-  // digitalWrite(dmxDePin, LOW);    // LOW = receive mode (CRITICAL!)
+    softSerial.begin(agentBaudRate); // Set baud rate as needed  
 }
 
 void loop() {
