@@ -8,6 +8,7 @@
 
 // Define the baud rate for the USD serial
 #define usbBaudRate 115200
+#define agentBaudRate 38400
 
 // Configure Interrupt Pins for the hard stops
 // Pins that support digital interrupts on clear core are:
@@ -36,9 +37,6 @@ extern volatile bool hardStopTrip; // Global variable to track if a hard stop ha
 #define Top 11732 // This is the number of pulses to get to the top.
 #define Mid Top/2
 #define Home_Offset 95 // This is 1 inch in pulses (I think)
-
-
-
 
 // Function Declarations
 void BottomHardStop();
