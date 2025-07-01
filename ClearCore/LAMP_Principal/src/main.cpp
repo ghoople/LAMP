@@ -12,12 +12,12 @@ bool debug = true;
 
 //Temporarily Initialize variables for storing DMX values, these will actually be in the DMX code
 // This will need to be removed if I get the DMX read to work and integrate it here. 
-uint8_t positionChannel = 0; // Position value ranges 0 -> 255
-uint8_t speedChannel = 0; // Speed value ranges 0->255
+int positionChannel = 0; // Position value ranges 0 -> 255
+int speedChannel = 0; // Speed value ranges 0->255
 
 // Variables to store last position
-uint8_t positionLast = 0; // Position value ranges 0 -> 255
-uint8_t speedLast = 0; // Speed value ranges 0->255
+int positionLast = 0; // Position value ranges 0 -> 255
+int speedLast = 0; // Speed value ranges 0->255
 
 
 void setup() {
@@ -27,6 +27,14 @@ void setup() {
         uint32_t timeout = 5000; // 5 second timeout
         uint32_t startTime = millis();
         while (!Serial && millis() - startTime < timeout) {
+            continue;
+        }
+    
+    // Serials Coms to the agent arduino via Serial 0 port. 
+        Serial0.begin(agentBaudRate);
+        Serial0.ttl(true); // Tells serial one to use TTL logiv (5V signals)
+        startTime = millis();
+        while (!Serial0 && millis() - startTime < timeout) {
             continue;
         }
 
@@ -54,15 +62,17 @@ void setup() {
         motor.EnableRequest(true);
 
 
-        // Home the motor
-        if(debug){Serial.println("Homing Motor");}
-        motor.MoveVelocity(homingVelocity); // Move down, will stop when the hard stop is tripped.  
-        // Wait for interrupt to trigger when hard stop reached, interrupt code will automatically set the 0 position.
-        while (!motor.StepsComplete()) {
-            continue;
-        }
+// TEMPORARILY DISABLE HOMING FOR TESTING COMS> MUST RE-ENABLE
+
+    //   // Home the motor
+    //   if(debug){Serial.println("Homing Motor");}
+    //     motor.MoveVelocity(homingVelocity); // Move down, will stop when the hard stop is tripped.  
+    //     // Wait for interrupt to trigger when hard stop reached, interrupt code will automatically set the 0 position.
+    //     while (!motor.StepsComplete()) {
+    //         continue;
+    //     }
         
-        if(debug){Serial.println("Homing Complete");}
+    //     if(debug){Serial.println("Homing Complete");}
     
 
     delay(1000); // Probably don't need this. But can give it all a second to catchup. 
@@ -71,10 +81,24 @@ void setup() {
 
 void loop() {
     
-    // DMX Code will go here, for now hard code: 
-
-        positionChannel = 100; // Position value ranges 0 -> 255
-        speedChannel = 50; // Speed value ranges 0->255
+    if(Serial0.available() > 0){
+        //If new data is available over the serial port, read it. 
+        String message = Serial0.readStringUntil('\n'); 
+        // Parse the message format "P:{position} S:{speed}"
+        int pos = 0, speed = 0;
+        if(sscanf(message.c_str(), "P:%d S:%d", &pos, &speed) == 2) {
+            positionChannel = pos;
+            speedChannel = speed;
+            if(debug){
+                Serial.print("Received: P:");
+                Serial.print(positionChannel);
+                Serial.print(" S:");
+                Serial.println(speedChannel);
+            }
+        } else if(debug) {
+            Serial.println("Failed to parse message: " + message);
+        }
+    }
 
     if (positionChannel != positionLast || speedChannel != speedLast) {
         
