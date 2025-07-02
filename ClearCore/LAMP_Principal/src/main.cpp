@@ -10,8 +10,7 @@
 
 bool debug = true;
 
-//Temporarily Initialize variables for storing DMX values, these will actually be in the DMX code
-// This will need to be removed if I get the DMX read to work and integrate it here. 
+//Initialize the DMX variables
 int positionChannel = 0; // Position value ranges 0 -> 255
 int speedChannel = 0; // Speed value ranges 0->255
 
@@ -30,7 +29,7 @@ void setup() {
             continue;
         }
     
-    // Serials Coms to the agent arduino via Serial 0 port. 
+    // Serials Coms to the LAMP_Agent arduino via Serial 0 port. 
         Serial0.begin(agentBaudRate);
         Serial0.ttl(true); // Tells serial one to use TTL logiv (5V signals)
         startTime = millis();
