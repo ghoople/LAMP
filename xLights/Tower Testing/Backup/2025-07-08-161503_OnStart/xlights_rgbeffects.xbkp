@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xrgb>
   <models>
-    <model DisplayAs="Single Line" StringType="RGB Nodes" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm1="1" parm3="1" LayoutGroup="Default" parm2="140" name="1 to 3" Controller="Ethernet_" ModelChain="&gt;1 to 2" WorldPosX="-92.8984" WorldPosY="66.0200" WorldPosZ="69.2500" X2="-138.500000" Y2="0.000000" Z2="0.000000" versionNumber="7" StartChannel="!Ethernet_:432">
-      <ControllerConnection Protocol="ws2811" Port="1"/>
-    </model>
-    <model DisplayAs="Single Line" StringType="RGB Nodes" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm1="1" parm3="1" LayoutGroup="Default" parm2="140" Controller="Ethernet_" name="1 to 2" WorldPosX="69.2500" WorldPosY="66.0000" WorldPosZ="69.2500" X2="-138.500000" Y2="0.000000" Z2="0.000000" versionNumber="7" StartChannel="!Ethernet_:12">
-      <ControllerConnection Protocol="ws2811" Port="1"/>
-    </model>
-    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" NodeNames="Light 1,Light 2" StrandNames="DMX" name="Tower Lights" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Light 1" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" WorldPosX="358.8275" WorldPosY="756.9407" WorldPosZ="0.0000" ScaleX="286.0238" ScaleY="248.2158" ScaleZ="0.0000" RotateX="0.00000000" RotateY="0.00000000" RotateZ="0.00000000" versionNumber="7" StartChannel="!Ethernet_:10">
-      <ControllerConnection Protocol="DMX-Open" Port="1" channel="10"/>
-    </model>
-    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Position" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" NodeNames="Position,Speed" StrandNames="DMX" name="Tower Motor" WorldPosX="98.6892" WorldPosY="610.6549" WorldPosZ="0.0000" ScaleX="516.5666" ScaleY="147.4335" ScaleZ="0.0000" RotateX="0.00000000" RotateY="0.00000000" RotateZ="90.00000000" versionNumber="7" StartChannel="!Ethernet_:1">
+    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Position" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" NodeNames="Position,Speed" StrandNames="DMX" name="Motor" WorldPosX="168.9881" WorldPosY="478.1079" WorldPosZ="0.0000" ScaleX="286.0238" ScaleY="248.2158" ScaleZ="0.0000" RotateX="0.00000000" RotateY="0.00000000" RotateZ="0.00000000" versionNumber="7" StartChannel="!Ethernet_:1">
       <ControllerConnection Protocol="DMX-Open" channel="1" Port="1"/>
+    </model>
+    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Position" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" NodeNames="Position,Speed" StrandNames="DMX" Controller="No Controller" name="DMX Lights" WorldPosX="208.0200" WorldPosY="478.1279" WorldPosZ="0.0000" ScaleX="286.0238" ScaleY="248.2158" ScaleZ="0.0000" RotateX="0.00000000" RotateY="0.00000000" RotateZ="0.00000000" versionNumber="7" StartChannel="3">
+      <ControllerConnection/>
     </model>
   </models>
   <view_objects>
@@ -28,7 +22,7 @@
   <settings>
     <previewWidth value="1280"/>
     <previewHeight value="720"/>
-    <LayoutMode3D value="1"/>
+    <LayoutMode3D value="0"/>
   </settings>
   <colors>
     <DisabledEffect Red="200" Green="200" Blue="0"/>

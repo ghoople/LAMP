@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Networks computer="Gordons-Mac-mini" GlobalFPPProxy="" GlobalForceLocalIP="" AutoUpdateFromBase="0" BaseShowDir="">
   <Controller Id="3" Name="Ethernet_" Description="" Type="Ethernet" Vendor="KulpLights" Model="K16A-B" Variant="No Expansion" AutoSize="1" FromBase="0" FullxLightsControl="TRUE" DefaultBrightnessUnderFullControl="100" DefaultGammaUnderFullControl="1" ActiveState="xLights Only" AutoLayout="1" AutoUpload="0" SuppressDuplicates="0" Monitor="1" IP="" Protocol="DDP" FPPProxy="" Priority="100" Version="1" Expanded="FALSE" UPS="FALSE" ForceLocalIP="">
-    <network ChannelsPerPacket="1440" KeepChannelNumbers="1" BaudRate="3" NetworkType="DDP" MaxChannels="851"/>
+    <network ChannelsPerPacket="1440" KeepChannelNumbers="1" BaudRate="3" NetworkType="DDP" MaxChannels="11"/>
   </Controller>
 </Networks>
