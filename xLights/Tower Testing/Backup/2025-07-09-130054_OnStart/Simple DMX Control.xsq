@@ -12,7 +12,7 @@
     <comment></comment>
     <sequenceTiming>25 ms</sequenceTiming>
     <sequenceType>Animation</sequenceType>
-    <mediaFile/>
+    <mediaFile></mediaFile>
     <sequenceDuration>30.000</sequenceDuration>
     <imageDir/>
   </head>
@@ -35,11 +35,6 @@
     <Element collapsed="0" type="timing" name="New Timing" visible="1" views="Master View" active="1"/>
     <Element collapsed="0" type="model" name="Tower Motor" visible="1"/>
     <Element collapsed="0" type="model" name="Tower Lights" visible="1"/>
-    <Element collapsed="0" type="model" name="A Side Pebble" visible="1"/>
-    <Element collapsed="0" type="model" name="B Side Pebble" visible="1"/>
-    <Element collapsed="0" type="model" name="Base Pebble" visible="1"/>
-    <Element collapsed="0" type="model" name="RGB Floods" visible="1"/>
-    <Element collapsed="0" type="model" name="UV Floods" visible="1"/>
   </DisplayElements>
   <ElementEffects>
     <Element type="timing" name="New Timing">
@@ -52,7 +47,7 @@
     </Element>
     <Element type="model" name="Tower Lights">
       <EffectLayer>
-        <Effect ref="1" name="DMX" startTime="0" endTime="9050" palette="0"/>
+        <Effect ref="1" name="DMX" selected="1" startTime="0" endTime="9050" palette="0"/>
       </EffectLayer>
       <Strand index="0" name="DMX">
         <Node index="1" name="Light 2">
@@ -60,21 +55,6 @@
           <Effect ref="3" name="Strobe" id="1" startTime="23950" endTime="36700" palette="1"/>
         </Node>
       </Strand>
-    </Element>
-    <Element type="model" name="A Side Pebble">
-      <EffectLayer/>
-    </Element>
-    <Element type="model" name="B Side Pebble">
-      <EffectLayer/>
-    </Element>
-    <Element type="model" name="Base Pebble">
-      <EffectLayer/>
-    </Element>
-    <Element type="model" name="RGB Floods">
-      <EffectLayer/>
-    </Element>
-    <Element type="model" name="UV Floods">
-      <EffectLayer/>
     </Element>
   </ElementEffects>
   <lastView>0</lastView>

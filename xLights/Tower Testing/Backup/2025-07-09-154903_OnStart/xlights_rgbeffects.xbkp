@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xrgb>
   <models>
-    <model DisplayAs="Custom" StartSide="B" Dir="L" Transparency="0" parm3="1" LayoutGroup="Default" name="UV Floods" CustomColor="#f800ff" StringType="Single Color Custom" Controller="Ethernet_" Antialias="0" PixelSize="18" CustomBkgLightness="0" CustomBkgImage="" parm1="3" parm2="3" Depth="1" CustomModel=",3,;4,,2;,1," CustomModelCompressed="3,0,1;4,1,0;2,1,2;1,2,1" WorldPosX="-8.0523" WorldPosY="192.1045" WorldPosZ="0.0000" ScaleX="17.4801" ScaleY="13.3695" ScaleZ="26.8851" RotateX="105.33002472" RotateY="85.73869324" RotateZ="-165.96539307" versionNumber="7" StartChannel="!Ethernet_:3867">
+    <model DisplayAs="Custom" StartSide="B" Dir="L" Transparency="0" parm3="1" LayoutGroup="Default" name="UV Floods" CustomColor="#f800ff" StringType="Single Color Custom" Controller="Ethernet_" Antialias="0" PixelSize="18" CustomBkgLightness="0" CustomBkgImage="" parm1="3" parm2="3" Depth="1" CustomModel=",3,;4,,2;,1," CustomModelCompressed="3,0,1;4,1,0;2,1,2;1,2,1" WorldPosX="0.8266" WorldPosY="172.5554" WorldPosZ="0.0000" ScaleX="17.4801" ScaleY="13.3695" ScaleZ="26.8851" RotateX="105.33002472" RotateY="85.73869324" RotateZ="-165.96539307" versionNumber="7" StartChannel="!Ethernet_:3867">
       <ControllerConnection Protocol="ws2811" Port="4"/>
     </model>
-    <model DisplayAs="Custom" StringType="RGB Nodes" StartSide="B" Dir="L" Transparency="0" parm3="1" LayoutGroup="Default" Controller="Ethernet_" name="RGB Floods" Antialias="1" PixelSize="20" parm2="3" parm1="3" Depth="1" CustomModel=",3,;4,,2;,1," CustomModelCompressed="3,0,1;4,1,0;2,1,2;1,2,1" CustomBkgLightness="0" CustomBkgImage="" WorldPosX="-7.1606" WorldPosY="185.2364" WorldPosZ="-5.4868" ScaleX="17.4801" ScaleY="13.3695" ScaleZ="26.8851" RotateX="105.33002472" RotateY="85.73869324" RotateZ="-165.96539307" versionNumber="7" StartChannel="!Ethernet_:3871">
+    <model DisplayAs="Custom" StringType="RGB Nodes" StartSide="B" Dir="L" Transparency="0" parm3="1" LayoutGroup="Default" Controller="Ethernet_" name="RGB Floods" Antialias="1" PixelSize="20" parm2="3" parm1="3" Depth="1" CustomModel=",3,;4,,2;,1," CustomModelCompressed="3,0,1;4,1,0;2,1,2;1,2,1" CustomBkgLightness="0" CustomBkgImage="" WorldPosX="0.8030" WorldPosY="172.5354" WorldPosZ="-5.4868" ScaleX="17.4801" ScaleY="13.3695" ScaleZ="26.8851" RotateX="105.33002472" RotateY="85.73869324" RotateZ="-165.96539307" versionNumber="7" StartChannel="!Ethernet_:3871">
       <ControllerConnection Protocol="ws2811" Port="5"/>
     </model>
     <model DisplayAs="Poly Line" StringType="RGB Nodes" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm1="1" parm3="1" LayoutGroup="Default" parm2="300" name="B Side Pebble" Controller="Ethernet_" WorldPosX="-1515.9800" WorldPosY="-192.4947" WorldPosZ="0.0000" ScaleX="1.0000" ScaleY="1.0000" ScaleZ="1.0000" NumPoints="4" PointData="1445.979980,264.494690,70.000000,1491.979980,360.494690,24.000000,1491.979980,360.494690,-24.000000,1445.979980,264.494690,-70.000000" cPointData="" Locked="1" versionNumber="7" StartChannel="!Ethernet_:2967">
@@ -13,10 +13,10 @@
     <model DisplayAs="Poly Line" StringType="RGB Nodes" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm1="1" parm3="1" LayoutGroup="Default" parm2="300" name="A Side Pebble" Controller="Ethernet_" WorldPosX="-1556.5791" WorldPosY="-192.5147" WorldPosZ="0.0000" ScaleX="1.0000" ScaleY="1.0000" ScaleZ="1.0000" NumPoints="4" PointData="1626.579102,264.514709,70.000000,1580.579102,360.514709,24.000000,1580.579102,360.514709,-24.000000,1626.579102,264.514709,-70.000000" cPointData="" Locked="1" versionNumber="7" StartChannel="!Ethernet_:2067">
       <ControllerConnection Protocol="ws2811" Port="2"/>
     </model>
-    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Position" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" NodeNames="Position,Speed" StrandNames="DMX" name="Tower Motor" WorldPosX="-81.7339" WorldPosY="97.7743" WorldPosZ="153.9413" ScaleX="39.7544" ScaleY="21.6406" ScaleZ="0.0000" RotateX="90.00000000" RotateY="0.00000000" RotateZ="90.00000000" versionNumber="7" StartChannel="!Ethernet_:1">
+    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Position" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" NodeNames="Position,Speed" StrandNames="DMX" name="Tower Motor" WorldPosX="311.3589" WorldPosY="138.2585" WorldPosZ="0.0000" ScaleX="204.1817" ScaleY="50.3644" ScaleZ="0.0000" RotateX="0.00000000" RotateY="0.00000000" RotateZ="90.00000000" versionNumber="7" StartChannel="!Ethernet_:1">
       <ControllerConnection Protocol="DMX-Open" channel="1" Port="1"/>
     </model>
-    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" NodeNames="Light 1,Light 2" StrandNames="DMX" name="Tower Lights" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Light 1" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" WorldPosX="-93.8890" WorldPosY="93.8276" WorldPosZ="109.0350" ScaleX="27.7964" ScaleY="32.9390" ScaleZ="0.0000" RotateX="0.00000000" RotateY="90.00000000" RotateZ="0.00000000" versionNumber="7" StartChannel="!Ethernet_:10">
+    <model DisplayAs="DmxGeneral" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm3="1" parm2="1" StringType="Single Color White" LayoutGroup="Default" parm1="2" DmxRedChannel="0" DmxGreenChannel="0" DmxBlueChannel="0" Controller="Ethernet_" NodeNames="Light 1,Light 2" StrandNames="DMX" name="Tower Lights" DmxPresetChannel0="1" DmxPresetValue0="0" DmxPresetDesc0="Light 1" DmxPresetChannel1="2" DmxPresetValue1="0" DmxPresetDesc1="Speed" WorldPosX="205.2592" WorldPosY="127.2581" WorldPosZ="0.0000" ScaleX="84.3911" ScaleY="116.9572" ScaleZ="0.0000" RotateX="0.00000000" RotateY="0.00000000" RotateZ="0.00000000" versionNumber="7" StartChannel="!Ethernet_:10">
       <ControllerConnection Protocol="DMX-Open" Port="1" channel="10"/>
     </model>
     <model DisplayAs="Poly Line" StringType="RGB Nodes" StartSide="B" Dir="L" Antialias="1" PixelSize="2" Transparency="0" parm1="1" parm3="1" LayoutGroup="Default" parm2="685" name="Base Pebble" Controller="Ethernet_" WorldPosX="-386.2645" WorldPosY="-109.0415" WorldPosZ="0.0000" ScaleX="1.0000" ScaleY="1.0000" ScaleZ="1.0000" NumPoints="5" PointData="456.264496,177.041504,70.000000,456.264496,177.041504,-70.000000,316.264496,177.041504,-70.000000,316.264496,177.041504,70.000000,455.264496,177.041504,70.000000" cPointData="" Locked="1" versionNumber="7" StartChannel="!Ethernet_:12">
@@ -31,7 +31,6 @@
   <palettes/>
   <modelGroups>
     <modelGroup selected="0" name="Pebbles" LayoutGroup="Default" models="A Side Pebble,B Side Pebble,Base Pebble" GridSize="400" XCentreOffset="0" YCentreOffset="0" DefaultCamera="2D" layout="minimalGrid" TagColour="black"/>
-    <modelGroup selected="0" name="Sides" layout="minimalGrid" GridSize="400" LayoutGroup="Default" models="A Side Pebble,B Side Pebble"/>
   </modelGroups>
   <layoutGroups/>
   <perspectives current="Default Perspective">
@@ -41,7 +40,6 @@
     <previewWidth value="1280"/>
     <previewHeight value="720"/>
     <LayoutMode3D value="1"/>
-    <storedLayoutGroup value="Default"/>
   </settings>
   <colors>
     <DisabledEffect Red="200" Green="200" Blue="0"/>
@@ -79,9 +77,5 @@
     <WaveformSelectedEffect Red="255" Green="128" Blue="0"/>
     <Words Red="255" Green="218" Blue="145"/>
   </colors>
-  <Viewpoints>
-    <Camera name="Test" posX="0.000000" posY="0.000000" posZ="0.000000" angleX="21.000000" angleY="272.000000" angleZ="0.000000" distance="-2000.000000" zoom="0.254101" panx="74.146461" pany="-96.587189" panz="-13.305429" zoom_corrx="0.000000" zoom_corry="0.000000" is_3d="1"/>
-    <Camera name="Standard" posX="0.000000" posY="0.000000" posZ="0.000000" angleX="9.000000" angleY="297.000000" angleZ="0.000000" distance="-2000.000000" zoom="0.254101" panx="74.146461" pany="-96.587189" panz="-13.305429" zoom_corrx="0.000000" zoom_corry="0.000000" is_3d="1"/>
-    <DefaultCamera3D name="DEFAULT3D" posX="0.000000" posY="0.000000" posZ="0.000000" angleX="9.000000" angleY="297.000000" angleZ="0.000000" distance="-2000.000000" zoom="0.254101" panx="74.146461" pany="-96.587189" panz="-13.305429" zoom_corrx="0.000000" zoom_corry="0.000000" is_3d="1"/>
-  </Viewpoints>
+  <Viewpoints/>
 </xrgb>

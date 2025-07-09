@@ -12,65 +12,61 @@
     <comment></comment>
     <sequenceTiming>25 ms</sequenceTiming>
     <sequenceType>Animation</sequenceType>
-    <mediaFile></mediaFile>
+    <mediaFile/>
     <sequenceDuration>30.000</sequenceDuration>
-    <imageDir></imageDir>
+    <imageDir/>
   </head>
   <nextid>1</nextid>
+  <Jukebox/>
   <ColorPalettes>
-    <ColorPalette>C_BUTTON_Palette1=#FFFFFF,C_BUTTON_Palette2=#FF0000,C_BUTTON_Palette3=#00FF00,C_BUTTON_Palette4=#0000FF,C_BUTTON_Palette5=#FFFF00,C_BUTTON_Palette6=#000000,C_BUTTON_Palette7=#00FFFF,C_BUTTON_Palette8=#FF00FF,C_CHECKBOX_Palette2=1</ColorPalette>
-    <ColorPalette>C_BUTTON_Palette1=#FFFFFF,C_BUTTON_Palette2=#FF0000,C_BUTTON_Palette3=#00FF00,C_BUTTON_Palette4=#0000FF,C_BUTTON_Palette5=#FFFF00,C_BUTTON_Palette6=#000000,C_BUTTON_Palette7=#00FFFF,C_BUTTON_Palette8=#FF00FF,C_CHECKBOX_Palette2=1,C_CHECKBOX_Palette3=1,C_CHECKBOX_Palette7=1</ColorPalette>
     <ColorPalette>C_BUTTON_Palette1=#FFFFFF,C_BUTTON_Palette2=#FF0000,C_BUTTON_Palette3=#00FF00,C_BUTTON_Palette4=#0000FF,C_BUTTON_Palette5=#FFFF00,C_BUTTON_Palette6=#000000,C_BUTTON_Palette7=#00FFFF,C_BUTTON_Palette8=#FF00FF,C_CHECKBOX_Palette8=1</ColorPalette>
+    <ColorPalette>C_BUTTON_Palette1=#FFFFFF,C_BUTTON_Palette2=#FF0000,C_BUTTON_Palette3=#00FF00,C_BUTTON_Palette4=#0000FF,C_BUTTON_Palette5=#FFFF00,C_BUTTON_Palette6=#000000,C_BUTTON_Palette7=#00FFFF,C_BUTTON_Palette8=#FF00FF,C_CHECKBOX_Palette2=1,C_CHECKBOX_Palette3=1,C_CHECKBOX_Palette7=1</ColorPalette>
   </ColorPalettes>
   <EffectDB>
-    <Effect>E_CHECKBOX_Fire_GrowWithMusic=0,E_CHOICE_Fire_Location=Bottom,E_SLIDER_Fire_Height=84,E_SLIDER_Fire_HueShift=0,E_TEXTCTRL_Fire_GrowthCycles=3.0</Effect>
-    <Effect>E_CHOICE_Butterfly_Colors=Rainbow,E_CHOICE_Butterfly_Direction=Normal,E_SLIDER_Butterfly_Chunks=1,E_SLIDER_Butterfly_Skip=2,E_SLIDER_Butterfly_Speed=10,E_SLIDER_Butterfly_Style=1</Effect>
     <Effect></Effect>
+    <Effect>E_CHECKBOX_Strobe_Music=0,E_SLIDER_Number_Strobes=1,E_SLIDER_Strobe_Duration=10,E_SLIDER_Strobe_Type=1</Effect>
+    <Effect>E_CHECKBOX_Chase_Group_All=0,E_CHOICE_Chase_Type1=Left-Right,E_CHOICE_Fade_Type=None,E_CHOICE_SingleStrand_Colors=Palette,E_CHOICE_SingleStrand_FX=Fireworks 1D,E_CHOICE_SingleStrand_FX_Palette=* Colors Only,E_CHOICE_Skips_Direction=Left,E_NOTEBOOK_SSEFFECT_TYPE=Skips,E_SLIDER_Color_Mix1=10,E_SLIDER_FX_Intensity=128,E_SLIDER_FX_Speed=128,E_SLIDER_Number_Chases=1,E_SLIDER_Skips_Advance=0,E_SLIDER_Skips_BandSize=5,E_SLIDER_Skips_SkipSize=2,E_SLIDER_Skips_StartPos=1,E_TEXTCTRL_Chase_Offset=0.0,E_TEXTCTRL_Chase_Rotations=1.0</Effect>
+    <Effect>E_CHECKBOX_PerNode=0,E_CHECKBOX_UsePalette=0,E_TEXTCTRL_Candle_FlameAgility=2,E_TEXTCTRL_Candle_WindBaseline=30,E_TEXTCTRL_Candle_WindCalmness=2,E_TEXTCTRL_Candle_WindVariability=5</Effect>
+    <Effect>E_CHOICE_Butterfly_Colors=Rainbow,E_CHOICE_Butterfly_Direction=Normal,E_SLIDER_Butterfly_Chunks=1,E_SLIDER_Butterfly_Skip=2,E_SLIDER_Butterfly_Speed=10,E_SLIDER_Butterfly_Style=1</Effect>
   </EffectDB>
   <DataLayers>
     <DataLayer lor_params="0" channel_offset="0" num_channels="0" num_frames="0" data="&lt;rendered: erase-mode&gt;" source="&lt;auto-generated&gt;" name="Nutcracker"/>
   </DataLayers>
   <DisplayElements>
     <Element collapsed="0" type="timing" name="New Timing" visible="1" views="Master View" active="1"/>
-    <Element collapsed="0" type="model" name="Pebbles" visible="1"/>
-    <Element collapsed="0" type="model" name="Sides" visible="1"/>
     <Element collapsed="0" type="model" name="UV Floods" visible="1"/>
     <Element collapsed="0" type="model" name="RGB Floods" visible="1"/>
     <Element collapsed="0" type="model" name="B Side Pebble" visible="1"/>
     <Element collapsed="0" type="model" name="A Side Pebble" visible="1"/>
     <Element collapsed="0" type="model" name="Tower Motor" visible="1"/>
     <Element collapsed="0" type="model" name="Tower Lights" visible="1"/>
+    <Element collapsed="0" type="model" name="Pebbles" visible="1"/>
     <Element collapsed="0" type="model" name="Base Pebble" visible="1"/>
+    <Element collapsed="0" type="model" name="Sides" visible="1"/>
   </DisplayElements>
   <ElementEffects>
     <Element type="timing" name="New Timing">
       <EffectLayer/>
     </Element>
-    <Element type="model" name="Pebbles">
-      <EffectLayer>
-        <Effect ref="0" name="Fire" startTime="19500" endTime="38900" palette="0"/>
-      </EffectLayer>
-    </Element>
-    <Element type="model" name="Sides">
-      <EffectLayer>
-        <Effect ref="1" name="Butterfly" startTime="1250" endTime="12400" palette="1"/>
-      </EffectLayer>
-    </Element>
     <Element type="model" name="UV Floods">
       <EffectLayer>
-        <Effect ref="2" name="On" startTime="0" endTime="16400" palette="2"/>
+        <Effect ref="0" name="On" startTime="12625" endTime="16600" palette="0"/>
       </EffectLayer>
     </Element>
     <Element type="model" name="RGB Floods">
       <EffectLayer>
-        <Effect ref="2" name="On" startTime="6625" endTime="15525" palette="0"/>
+        <Effect ref="1" name="Strobe" startTime="1025" endTime="9275" palette="1"/>
       </EffectLayer>
     </Element>
     <Element type="model" name="B Side Pebble">
-      <EffectLayer/>
+      <EffectLayer>
+        <Effect ref="2" name="SingleStrand" startTime="3825" endTime="10225" palette="1"/>
+      </EffectLayer>
     </Element>
     <Element type="model" name="A Side Pebble">
-      <EffectLayer/>
+      <EffectLayer>
+        <Effect ref="3" name="Candle" startTime="3750" endTime="10150" palette="1"/>
+      </EffectLayer>
     </Element>
     <Element type="model" name="Tower Motor">
       <EffectLayer/>
@@ -78,9 +74,17 @@
     <Element type="model" name="Tower Lights">
       <EffectLayer/>
     </Element>
+    <Element type="model" name="Pebbles">
+      <EffectLayer/>
+    </Element>
     <Element type="model" name="Base Pebble">
       <EffectLayer>
-        <Effect ref="1" name="Butterfly" startTime="2475" endTime="13625" palette="1"/>
+        <Effect ref="4" name="Butterfly" startTime="3875" endTime="10275" palette="1"/>
+      </EffectLayer>
+    </Element>
+    <Element type="model" name="Sides">
+      <EffectLayer>
+        <Effect ref="4" name="Butterfly" selected="1" startTime="20750" endTime="27150" palette="1"/>
       </EffectLayer>
     </Element>
   </ElementEffects>
