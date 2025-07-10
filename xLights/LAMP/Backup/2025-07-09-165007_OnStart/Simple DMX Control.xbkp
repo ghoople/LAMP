@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsequence BaseChannel="0" ChanCtrlBasic="0" ChanCtrlColor="0" FixedPointTiming="1" ModelBlending="true">
+  <head>
+    <version>2025.06</version>
+    <author></author>
+    <author-email></author-email>
+    <author-website></author-website>
+    <song></song>
+    <artist></artist>
+    <album></album>
+    <MusicURL></MusicURL>
+    <comment></comment>
+    <sequenceTiming>25 ms</sequenceTiming>
+    <sequenceType>Animation</sequenceType>
+    <mediaFile/>
+    <sequenceDuration>30.000</sequenceDuration>
+    <imageDir/>
+  </head>
+  <nextid>1</nextid>
+  <Jukebox/>
+  <ColorPalettes>
+    <ColorPalette>C_BUTTON_Palette1=#FFFFFF,C_BUTTON_Palette2=#FF0000,C_BUTTON_Palette3=#00FF00,C_BUTTON_Palette4=#0000FF,C_BUTTON_Palette5=#FFFF00,C_BUTTON_Palette6=#000000,C_BUTTON_Palette7=#00FFFF,C_BUTTON_Palette8=#FF00FF,C_CHECKBOX_Palette1=1,C_CHECKBOX_Palette2=1</ColorPalette>
+    <ColorPalette>C_BUTTON_Palette1=#FFFFFF,C_BUTTON_Palette2=#FF0000,C_BUTTON_Palette3=#00FF00,C_BUTTON_Palette4=#0000FF,C_BUTTON_Palette5=#FFFF00,C_BUTTON_Palette6=#000000,C_BUTTON_Palette7=#00FFFF,C_BUTTON_Palette8=#FF00FF,C_CHECKBOX_Palette1=1</ColorPalette>
+  </ColorPalettes>
+  <EffectDB>
+    <Effect>E_CHECKBOX_INVDMX1=0,E_CHECKBOX_INVDMX2=0,E_NOTEBOOK1=Channels 1-16,E_SLIDER_DMX1=255,E_SLIDER_DMX2=131</Effect>
+    <Effect>E_CHECKBOX_INVDMX1=0,E_CHECKBOX_INVDMX2=0,E_NOTEBOOK1=Channels 1-16,E_SLIDER_DMX1=255,E_SLIDER_DMX2=0</Effect>
+    <Effect></Effect>
+    <Effect>E_CHECKBOX_Strobe_Music=0,E_SLIDER_Number_Strobes=1,E_SLIDER_Strobe_Duration=1,E_SLIDER_Strobe_Type=1</Effect>
+  </EffectDB>
+  <DataLayers>
+    <DataLayer lor_params="0" channel_offset="0" num_channels="0" num_frames="0" data="&lt;rendered: erase-mode&gt;" source="&lt;auto-generated&gt;" name="Nutcracker"/>
+  </DataLayers>
+  <DisplayElements>
+    <Element collapsed="0" type="timing" name="New Timing" visible="1" views="Master View" active="1"/>
+    <Element collapsed="0" type="model" name="Tower Motor" visible="1"/>
+    <Element collapsed="0" type="model" name="Tower Lights" visible="1"/>
+    <Element collapsed="0" type="model" name="A Side Pebble" visible="1"/>
+    <Element collapsed="0" type="model" name="B Side Pebble" visible="1"/>
+    <Element collapsed="0" type="model" name="Base Pebble" visible="1"/>
+    <Element collapsed="0" type="model" name="RGB Floods" visible="1"/>
+    <Element collapsed="0" type="model" name="UV Floods" visible="1"/>
+  </DisplayElements>
+  <ElementEffects>
+    <Element type="timing" name="New Timing">
+      <EffectLayer/>
+    </Element>
+    <Element type="model" name="Tower Motor">
+      <EffectLayer>
+        <Effect ref="0" name="DMX" startTime="0" endTime="9050" palette="0"/>
+      </EffectLayer>
+    </Element>
+    <Element type="model" name="Tower Lights">
+      <EffectLayer>
+        <Effect ref="1" name="DMX" startTime="0" endTime="9050" palette="0"/>
+      </EffectLayer>
+      <Strand index="0" name="DMX">
+        <Node index="1" name="Light 2">
+          <Effect ref="2" name="On" startTime="11375" endTime="22575" palette="1"/>
+          <Effect ref="3" name="Strobe" id="1" startTime="23950" endTime="36700" palette="1"/>
+        </Node>
+      </Strand>
+    </Element>
+    <Element type="model" name="A Side Pebble">
+      <EffectLayer/>
+    </Element>
+    <Element type="model" name="B Side Pebble">
+      <EffectLayer/>
+    </Element>
+    <Element type="model" name="Base Pebble">
+      <EffectLayer/>
+    </Element>
+    <Element type="model" name="RGB Floods">
+      <EffectLayer/>
+    </Element>
+    <Element type="model" name="UV Floods">
+      <EffectLayer/>
+    </Element>
+  </ElementEffects>
+  <lastView>0</lastView>
+  <TimingTags>
+    <Tag number="0" position="-1"/>
+    <Tag number="1" position="-1"/>
+    <Tag number="2" position="-1"/>
+    <Tag number="3" position="-1"/>
+    <Tag number="4" position="-1"/>
+    <Tag number="5" position="-1"/>
+    <Tag number="6" position="-1"/>
+    <Tag number="7" position="-1"/>
+    <Tag number="8" position="-1"/>
+    <Tag number="9" position="-1"/>
+  </TimingTags>
+</xsequence>
